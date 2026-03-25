@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f8f5" />
+    <meta name="description" content="JyClaw 电商经营决策台：把价格、库存和投放信号整理成有证据、可审批的经营建议。当前页面使用示例数据。" />
+    <title>JyClaw · 电商经营决策台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="侧边栏">
+        <a class="brand" href="#overview" aria-label="JyClaw 首页">
+          <span class="brand-mark" aria-hidden="true">J<span>✳</span></span>
+          <span class="brand-copy"><strong>JyClaw</strong><small>COMMERCE AGENT</small></span>
+        </a>
+        <div class="workspace-select"><span class="workspace-icon" aria-hidden="true">店</span><span><small>当前工作区</small><strong>电商经营空间</strong></span></div>
+        <p class="nav-label">工作台</p>
+        <nav class="side-nav" aria-label="主导航">
+          <a class="nav-item active" href="#overview"><span aria-hidden="true">◫</span>经营总览</a>
+          <a class="nav-item" href="#signals"><span aria-hidden="true">⌁</span>异常信号</a>
+          <a class="nav-item" href="#workflow"><span aria-hidden="true">⇄</span>处理流程</a>
+          <a class="nav-item" href="#memory"><span aria-hidden="true">▤</span>工作区记忆</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="scope-label"><span class="scope-dot"></span>前端概念界面</div>
+          <p>商品与经营数据为示例；审批和业务操作尚未连接服务端。</p>
+          <a class="source-link" href="https://github.com/ljiaye966-max/work" target="_blank" rel="noreferrer">查看项目仓库 <span>↗</span></a>
+        </div>
+      </aside>
+
+      <main class="main-area" id="overview">
+        <header class="topbar">
+          <div class="breadcrumbs">工作区 <span>/</span> 电商经营 <span>/</span> 总览</div>
+          <div class="top-actions"><span class="sample-badge"><i></i>示例数据</span><span class="avatar" aria-label="用户 刘">刘</span></div>
+        </header>
+        <div class="page-wrap">
+          <section class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow"><span></span>JYCLAW · COMMERCE OPERATIONS</div>
+              <h1>让经营异常<br /><em>有证据地被处理</em></h1>
+              <p>把价格、库存、销量和投放信号放进同一条决策链。Agent 可以协助调查并整理建议；涉及改价、调预算、补货和下架的动作，需要服务端校验与人工审批。</p>
+              <div class="hero-actions">
+                <a class="button primary" href="#signals">查看异常信号 <span>↗</span></a>
+                <a class="button subtle" href="#workflow">了解处理流程 <span>→</span></a>
+              </div>
+            </div>
+            <div class="hero-visual" aria-label="从异常信号到审批的概念流程">
+              <div class="visual-top"><span>经营信号流</span><span class="visual-tag">示例</span></div>
+              <div class="visual-chart" aria-hidden="true">
+                <div class="chart-labels"><span>价格</span><span>库存</span><span>投放</span></div>
+                <div class="chart-track"><span class="chart-bar price"></span><span class="chart-bar stock"></span><span class="chart-bar ads"></span></div>
+              </div>
+              <div class="visual-divider"></div>
+              <div class="visual-route"><span class="route-icon">⌁</span><div><strong>异常识别</strong><small>对齐 SKU 与时间窗口</small></div><b>→</b><span class="route-icon green">✓</span><div><strong>审阅建议</strong><small>人工确认后执行</small></div></div>
+            </div>
+          </section>
+
+          <div class="scope-banner"><span class="banner-icon">i</span><p><strong>当前展示范围</strong>　本页面是可交互的前端概念稿。数字、案例和记忆来自本地示例数据；不会调用模型、电商平台 API，也不会执行经营变更。</p></div>
+
+          <section class="overview-section" aria-labelledby="overview-title">
+            <div class="section-heading"><div><span class="section-kicker">OVERVIEW</span><h2 id="overview-title">经营信号概览</h2><p>从示例案例中看哪些事项需要调查、建议或审批。</p></div><span class="section-aside">今日工作区 · 示例视图</span></div>
+            <div class="metric-grid">
+              <article class="metric-card"><span class="metric-icon price-icon">¥</span><p>价格异常</p><strong>02 <small>条</small></strong><span class="metric-foot">需核对促销与规格</span></article>
+              <article class="metric-card"><span class="metric-icon stock-icon">▤</span><p>库存风险</p><strong>01 <small>条</small></strong><span class="metric-foot">关注可售覆盖天数</span></article>
+              <article class="metric-card"><span class="metric-icon ad-icon">↗</span><p>投放信号</p><strong>01 <small>条</small></strong><span class="metric-foot">预算与转化待复核</span></article>
+              <article class="metric-card"><span class="metric-icon review-icon">✓</span><p>待人工审批</p><strong>02 <small>项</small></strong><span class="metric-foot">页面不执行实际操作</span></article>
+            </div>
+          </section>
+
+          <section class="signals-section" id="signals" aria-labelledby="signals-title">
+            <div class="section-heading"><div><span class="section-kicker">SIGNAL DESK</span><h2 id="signals-title">异常调查台</h2><p>先看证据，再判断是否值得提出动作。</p></div><span class="section-aside">点击左侧案例查看说明</span></div>
+            <div class="desk-grid">
+              <div class="panel signal-list-panel">
+                <div class="panel-header"><h3>待处理信号</h3><span class="count-pill">4 条示例</span></div>
+                <div class="filter-row" role="group" aria-label="异常类型筛选">
+                  <button class="filter-button active" data-filter="all" aria-pressed="true">全部</button>
+                  <button class="filter-button" data-filter="price" aria-pressed="false">价格</button>
+                  <button class="filter-button" data-filter="stock" aria-pressed="false">库存</button>
+                  <button class="filter-button" data-filter="ads" aria-pressed="false">投放</button>
+                </div>
+                <div class="signal-list" id="signal-list" aria-live="polite"></div>
+              </div>
+              <article class="panel investigation-panel">
+                <div class="panel-header"><div><span class="section-kicker">INVESTIGATION</span><h3 id="detail-title">案例详情</h3></div><span class="severity" id="detail-severity">高优先级</span></div>
+                <p class="detail-summary" id="detail-summary"></p>
+                <div class="case-meta"><span id="detail-sku"></span><span id="detail-window"></span></div>
+                <div class="detail-group"><h4>核对证据</h4><ul class="evidence-list" id="detail-evidence"></ul></div>
+                <div class="decision-box"><span class="decision-icon">✳</span><div><small>建议草案</small><p id="detail-action"></p></div></div>
+                <div class="guardrail"><strong>执行前约束</strong><p id="detail-guardrail"></p></div>
+                <div class="detail-footer"><span class="approval-pill" id="detail-status">待人工审批</span><button class="copy-button" id="copy-action">复制建议 <span>▢</span></button></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="workflow-section" id="workflow" aria-labelledby="workflow-title">
+            <div class="section-heading"><div><span class="section-kicker">WORKFLOW</span><h2 id="workflow-title">从信号到复核的六步流程</h2><p>每一步都有明确输入和产物；高影响动作由人把关。</p></div></div>
+            <div class="workflow-grid">
+              <div class="workflow-step"><span>01</span><strong>监控</strong><p>采集商品与经营快照</p></div>
+              <div class="workflow-step"><span>02</span><strong>识别</strong><p>用规则标出可疑变化</p></div>
+              <div class="workflow-step"><span>03</span><strong>调查</strong><p>核对规格、促销与来源</p></div>
+              <div class="workflow-step"><span>04</span><strong>建议</strong><p>整理证据和约束条件</p></div>
+              <div class="workflow-step approval-step"><span>05</span><strong>审批</strong><p>人工确认业务动作</p></div>
+              <div class="workflow-step"><span>06</span><strong>复核</strong><p>回读结果并留痕</p></div>
+            </div>
+          </section>
+
+          <section class="memory-section panel" id="memory" aria-labelledby="memory-title">
+            <div class="section-heading"><div><span class="section-kicker">WORKSPACE MEMORY</span><h2 id="memory-title">可复用的经营知识</h2><p>用结构化条目保存事实、决策、经验和待跟进事项。</p></div><span class="section-aside">示例条目</span></div>
+            <div class="memory-tabs" role="group" aria-label="记忆类型筛选">
+              <button class="memory-tab selected" data-kind="all" aria-pressed="true">全部</button>
+              <button class="memory-tab" data-kind="fact" aria-pressed="false">事实 fact</button>
+              <button class="memory-tab" data-kind="decision" aria-pressed="false">决策 decision</button>
+              <button class="memory-tab" data-kind="lesson" aria-pressed="false">经验 lesson</button>
+              <button class="memory-tab" data-kind="open_loop" aria-pressed="false">待跟进 open_loop</button>
+            </div>
+            <div class="memory-list" id="memory-list" aria-live="polite"></div>
+            <p class="memory-note">结构化记忆与聊天记录各有用途。真正的跨会话写入和版本冲突处理需要后端支持；此处只展示信息组织方式。</p>
+          </section>
+
+          <footer class="footer"><span>JyClaw · 电商经营决策台</span><span>前端概念界面 · 示例数据</span><a href="https://github.com/ljiaye966-max/work" target="_blank" rel="noreferrer">GitHub ↗</a></footer>
+        </div>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

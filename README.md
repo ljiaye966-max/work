@@ -1,66 +1,61 @@
-# Miniclaw
+# JyClaw — 电商经营决策 Agent
+
+JyClaw 面向价格、库存、销量和投放等经营信号，目标是把“监控 → 识别 → 调查 → 建议 → 审批 → 复核”串成可追踪的决策流程。当前的 [JyClaw 经营界面](docs/jyclaw-demo/index.html)是静态前端概念稿，展示示例数据和交互；电商平台数据接入、真实 Agent 调查、审批执行与复核接口仍属于后续实现范围。
 
 <p align="center">
-  <img src="web/public/icons/logo-1024.png" alt="Miniclaw logo" width="96" />
+  <strong>让经营异常形成有证据、可审阅的建议</strong><br />
+  以自托管 Agent 工作台为技术底座，设计面向电商场景的决策工作流。
 </p>
 
 <p align="center">
-  <strong>自托管、Pi Agent 驱动的多渠道智能体工作台</strong><br />
-  把 Agent、工作区、记忆、工具、渠道与自动化任务组织在同一个可控的运行环境中。
-</p>
-
-<p align="center">
-  <a href="https://github.com/helsome/miniclaw">GitHub</a> ·
+  <a href="docs/jyclaw-demo/index.html">JyClaw 经营界面</a> ·
+  <a href="https://github.com/helsome/miniclaw">上游项目</a> ·
   <a href="docs/API.md">API</a> ·
   <a href="docs/ACL-MATRIX.md">权限模型</a> ·
   <a href="SECURITY.md">安全策略</a>
 </p>
 
-> 一句话：聊天界面让你向 Agent 提问；Miniclaw 让 Agent 拥有长期运行的工作区、可审计的能力边界，以及能够被 Web、桌面端和消息渠道共同使用的运行时。
+> 一句话：用 Agent 整理经营信号和证据，让高影响动作在校验与人工审批后再执行。
 
-## 产品定位
+## 代码范围与来源
 
-Miniclaw 是一个面向个人与团队的自托管 AI Agent 工作台。它不是一个只保存聊天记录的对话框，而是把以下对象放在同一个产品模型中：
+- 本仓库保留 [MiniClaw 上游项目](https://github.com/helsome/miniclaw)的开源底座代码，包括 Agent Runtime、Workspace、Memory、工具授权、渠道和桌面端。原项目的 MIT License 与版权声明保留在仓库中。
+- JyClaw 的电商场景界面位于 [docs/jyclaw-demo](docs/jyclaw-demo/index.html)。该界面的异常、指标和建议均为示例数据，尚未接入真实电商平台、模型或执行接口。
+- 下文“底座能力”描述本仓库保留的源码范围；“电商工作流”描述 JyClaw 的场景设计。两者的实现状态应分别理解。
+
+## 产品定位与底座
+
+JyClaw 的业务目标是把同口径 SKU、价格、库存、销量和广告数据整理为异常调查线索。Agent 生成建议草案，人工审批有业务影响的动作。底座代码沿用 MiniClaw 的自托管工作台模型，将以下对象组织在一起：
 
 - Agent 身份、模型策略与能力配置。
 - Workspace 文件、执行环境、权限和渠道绑定。
 - 持久化 Session、流式输出、取消、恢复和后台运行。
 - Workspace 级 Memory、Skills、MCP、Plugins 与 Subagents。
-- Web、Electron Desktop、飞书、Telegram、QQ、钉钉、微信、Discord、WhatsApp 等入口。
+- Web、Electron Desktop 与多种消息渠道入口。
 - Cron、间隔和一次性任务，以及任务运行历史、通知与恢复。
 
-Miniclaw 采用本地优先和显式集成的思路：数据库、工作区元数据、会话状态和配置由自己的服务管理；模型、消息渠道、Docker 与外部工具都作为可配置边界接入。
+底座采用本地优先和显式集成的思路：数据库、工作区元数据、会话状态和配置由服务端管理；模型、消息渠道、Docker 与外部工具作为可配置边界接入。电商 Adapter、统一 SKU Schema、异常规则、审批和动作执行仍需要独立实现。
 
 ## 界面与体验
 
-工作台围绕 `Agent → Workspace → Runtime Session` 组织信息。左侧导航提供工作台、智能体、能力库、任务、用量、账单和设置入口；进入工作台后，可以在同一个界面中切换 Agent、Workspace 和对话上下文。
-
-下面是当前桌面端工作台的实际界面：
+JyClaw 的界面从经营场景出发：先给出价格、库存和投放信号，再展示同口径证据、建议草案、执行约束和人工审批位置。下面是 [JyClaw 前端示例](docs/jyclaw-demo/index.html)的当前页面，使用本地示例数据：
 
 <p align="center">
-  <img src="docs/screenshots/workbench.png" alt="Miniclaw 智能体工作台" width="900" />
+  <img src="docs/screenshots/jyclaw-dashboard.png" alt="JyClaw 电商经营决策台界面，展示经营概览与异常调查" width="900" />
 </p>
 
-<p align="center">
-  <em>工作台：在同一个窗口中管理 Agent、Workspace、Session 与对话。</em>
-</p>
+<p align="center"><em>经营概览与异常调查：证据、建议和审批边界放在同一条处理链中。截图来自静态前端界面，不表示已连接生产数据或自动执行改价。</em></p>
 
-<p align="center">
-  <img src="docs/screenshots/capabilities.png" alt="Miniclaw 能力库" width="49%" />
-  <img src="docs/screenshots/settings-models.png" alt="Miniclaw 模型配置" width="49%" />
-</p>
+## 电商工作流设计
 
-<p align="center">
-  <em>能力库与模型配置：把 Skills、MCP、Plugins 和 Provider 配置放在清晰的管理边界内。</em>
-</p>
+1. **监控与归一化**：按 SKU、规格、来源、币种、促销状态和时间窗口整理商品与经营数据。
+2. **异常识别**：对价格偏离、库存覆盖天数和投放消耗设置可解释规则，先检查数据质量。
+3. **调查与建议**：Agent 使用只读工具核对促销、成本、库存和历史窗口，再生成附证据的建议草案。
+4. **审批与复核**：改价、调预算、补货、下架经过服务端预校验和人工确认；执行后重新读取业务系统状态。
 
-新的 Miniclaw 图标同时用于 Web/PWA、Electron 窗口和安装包资源：
+上述电商链路是 JyClaw 的目标设计。当前前端展示了界面与交互，底座仓库提供通用 Agent 能力；电商专用 Adapter 和动作接口尚未在此仓库落地。
 
-<p align="center">
-  <img src="web/public/icons/logo-1024.png" alt="Miniclaw application icon" width="160" />
-</p>
-
-## 核心功能
+## 底座代码能力
 
 ### Agent 与 Workspace
 
@@ -145,8 +140,8 @@ Web Client / Electron Desktop / Message Channels
 ### 启动 Backend 与 Web Client
 
 ```bash
-git clone https://github.com/helsome/miniclaw.git
-cd miniclaw
+git clone https://github.com/ljiaye966-max/work.git
+cd work
 
 npm install
 npm --prefix web install

@@ -124,7 +124,7 @@ export function AppLayout() {
   );
   const appearance = useAuthStore((s) => s.appearance);
   useEffect(() => {
-    const appName = appearance?.appName || 'Miniclaw';
+    const appName = appearance?.appName || 'JyClaw';
     document.title = totalUnread > 0 ? `(${totalUnread}) ${appName}` : appName;
   }, [totalUnread, appearance?.appName]);
 
@@ -167,6 +167,25 @@ export function AppLayout() {
 
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden relative">
         <ConnectionBanner />
+        <div
+          role="note"
+          className="flex shrink-0 items-center gap-2 border-b border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-950 sm:px-5"
+        >
+          <span aria-hidden="true" className="font-semibold text-emerald-700">
+            JyClaw 场景
+          </span>
+          <p className="min-w-0 flex-1 leading-5 text-emerald-900">
+            电商经营决策流程正在场景化建设。涉及改价、调预算、补货和下架的动作，应经过服务端校验与人工审批。
+          </p>
+          <a
+            href="https://github.com/helsome/miniclaw"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden shrink-0 text-emerald-800 underline-offset-2 hover:underline sm:inline"
+          >
+            技术底座 ↗
+          </a>
+        </div>
         <main
           data-app-scroll-root="true"
           className={`flex-1 min-h-0 lg:overflow-auto lg:pb-0 ${
